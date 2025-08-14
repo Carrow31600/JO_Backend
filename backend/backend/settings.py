@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'users',
     'lieux',
+    'sports',
 ]
 
 MIDDLEWARE = [
