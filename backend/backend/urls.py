@@ -27,6 +27,7 @@ urlpatterns = [
     path('api/events/', include('events.urls')),
     path('api/offers/', include('offers.urls')),
     path('api/payment/', include('payment.urls')),
+    path('api/scan/', include('scan.urls')),
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
