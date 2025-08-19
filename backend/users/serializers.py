@@ -25,9 +25,13 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         return user
 
 # gestion de la modification d'un compte utilisateur
-# Tous les champs sont renvoyés sauf password et secret_key
 class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        exclude = ('password','secret_key',)
-    
+        fields = ('username', 'first_name', 'email')
+        read_only_fields = ('username',)
+        extra_kwargs = {
+            'email': {'required': False},
+            'first_name': {'required': False},
+        }
+
