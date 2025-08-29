@@ -14,5 +14,5 @@ def mock_payment_service(user_id, lines):
         line['total_price'] = line['quantity'] * offer.prix
 
     total_price = sum(line['total_price'] for line in lines)
-    success = random.random() < 0.8  # 80% de succès
+    success = random.random() < 1  # 100% de succès
     return {"success": success, "total_price": total_price, "lines": lines}
