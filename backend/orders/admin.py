@@ -15,3 +15,5 @@ class OrderLineAdmin(admin.ModelAdmin):
     )
     search_fields = ("user__username", "event__sport__nom", "offer__nom")
     list_filter = ("event", "offer")
+
+    readonly_fields = ("order_key",)
