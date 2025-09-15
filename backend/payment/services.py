@@ -1,7 +1,10 @@
-''' simulation d'un paiement avec un prestataire externe qui renvoi TRUE si le paiement est passé
-et FALSE dans le cas contraire.
-Le mock calcul le prix de chaque ligne de commande et le prix total à payer
-Si le paiement est TRUE, il appelle le service dans Orders pour créer les lignes de commandes'''
+
+#**********************************************************************
+# Simulation d'un service de gestion du paiement
+# renvoi true si paiement Ok et false sinon
+# calcul le prix pour chaque ligne de commande et le total à payer
+# si le paiement est true, appelle create_orders_from_payment pour crééer les lignes de commandes
+# ***********************************************************************
 
 import random
 from offers.models import Offer
@@ -9,10 +12,12 @@ from offers.models import Offer
 def mock_payment_service(user_id, lines):
 
     for line in lines:
-        offer = Offer.objects.get(id=line['offer'])
-        line['price_per_unit'] = float(offer.prix)
-        line['total_price'] = line['quantity'] * offer.prix
+        offer = Offer.objects.get(id=line['offer']) # on récupère l'offre dans la base
+        line['price_per_unit'] = float(offer.prix) # on récupère le prix de l'offre
+        line['total_price'] = line['quantity'] * offer.prix # on calcul le prix total de la ligne
 
-    total_price = sum(line['total_price'] for line in lines)
-    success = random.random() < 1  # 100% de succès
+    total_price = sum(line['total_price'] for line in lines) # on calcul le prix total de toutes les lignes
+    success = random.random() < 1  # 100% de succès (à faire varier pour les tests)
+
+    
     return {"success": success, "total_price": total_price, "lines": lines}

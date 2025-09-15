@@ -6,12 +6,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.db.models import Sum
 
-
+# **********************************************************
+# Liste des tickets de l'utilisateur connecté
+# **********************************************************
 
 class MyOrdersListView(generics.ListAPIView):
-    """
-    Retourne la liste des tickets de l'utilisateur connecté.
-    """
+
     serializer_class = OrderLineSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -20,19 +20,23 @@ class MyOrdersListView(generics.ListAPIView):
         return OrderLine.objects.filter(user=self.request.user).select_related("event", "offer")
 
 
+# ***********************************************************
+# Statistiques de ventes
+#************************************************************
+
 class SalesStatsView(APIView):
     permission_classes = [permissions.IsAdminUser]
 
     def get(self, request):
-        # Regrouper uniquement par offre
+        # Regrouper par offre
         stats = (
             OrderLine.objects
-            .values("offer__nom")
+            .values("offer__nom") # regroupement par nom d'offre
             .annotate(
-                total_tickets=Sum("total_places"),
-                total_revenue=Sum("total_price")
+                total_tickets=Sum("total_places"),# total du nombre de places vendues
+                total_revenue=Sum("total_price") # CA total
             )
-            .order_by("offer__nom")
+            .order_by("offer__nom") # tri par nom d'offre
         )
 
         # Totaux globaux

@@ -6,6 +6,11 @@ from .services import mock_payment_service
 from users.models import CustomUser
 from orders.services import create_orders_from_payment
 
+
+#*****************************************
+# API de simulation du paiement
+#*****************************************
+
 class MockPaymentView(APIView):
     # Récupère les infos de la requete
     def post(self, request):

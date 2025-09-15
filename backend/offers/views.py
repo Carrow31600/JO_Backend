@@ -7,9 +7,10 @@ class OfferViewSet(viewsets.ModelViewSet):
     queryset = Offer.objects.all()
     serializer_class = OfferSerializer
 
+# personnalisation des autorisations
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
-            permission_classes = [AllowAny] 
+            permission_classes = [AllowAny]  # Liste et détail des offres accessible à tout le monde
         else:
-            permission_classes = [IsAdminUser]  
+            permission_classes = [IsAdminUser]  # User doit être admin pour créer, modifier, supprimer (tout le reste)
         return [permission() for permission in permission_classes]
