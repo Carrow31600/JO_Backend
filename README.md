@@ -58,7 +58,7 @@ python manage.py runserver
 
 Le serveur sera disponible à l’adresse : http://127.0.0.1:8000
 
-# Documentation API
+## Documentation API
 
 Outil : drf-yasg
 
@@ -66,15 +66,15 @@ Swagger UI → http://127.0.0.1:8000/swagger/
 
 ReDoc → http://127.0.0.1:8000/redoc/
 
-# Lancer les tests
+## Lancer les tests
 
 python manage.py test
 
-# Déploiement (pythonanywhere)
+## Déploiement (pythonanywhere)
 
-## 1. Créer une base MySQL sur PythonAnywhere
+### 1. Créer une base MySQL sur PythonAnywhere
 
-## 2. Adapter le fichier .env avec la configuration MySQL
+### 2. Adapter le fichier .env avec la configuration MySQL
 
 SECRET_KEY=changer_cette_clef
 
@@ -92,11 +92,52 @@ DATABASE_HOST=nom_du_serveur
 
 DATABASE_PORT=3306
 
-## 3. Lancer les migrations et collecter les fichiers statiques
+### 3. Lancer les migrations et collecter les fichiers statiques
 
 python manage.py migrate
 
 python manage.py collectstatic
 
+## Sécurité
 
+Authentification par tokens avec Django REST Framework.
 
+Les mots de passe sont automatiquement hachés par Django
+
+Django applique par défaut des règles de sécurité minimales sur les mots de passe.
+
+Protections natives Django/DRF :
+
+CSRF sur les formulaires,
+
+ORM contre les injections SQL,
+
+Validation stricte des entrées via DRF.
+
+Tous les échanges en production passent par HTTPS.
+
+## Tests
+
+Les tests sont réalisés avec la commande native Django :
+
+python manage.py test
+
+Plusieurs tests sont déjà écrits pour le backend (modèles, API, logique métier)
+
+## Évolutions prévues
+
+Ajout de la fonctionnalité mot de passe oublié.
+
+Endpoint de scan des billets déjà disponible, en attente d’intégration côté frontend.
+
+Amélioration de la couverture des tests unitaires et d’intégration.
+
+## État actuel
+
+Backend fonctionnel en local et en production (PythonAnywhere)
+
+Communication opérationnelle avec le frontend React déployé sur Vercel
+
+Authentification sécurisée avec tokens
+
+Documentation API disponible via Swagger et ReDoc
