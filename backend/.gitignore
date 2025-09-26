@@ -54,3 +54,6 @@ local_settings.py
 
 # JetBrains IDEs
 *.iml
+
+backend/schema.sql
+backend/schema_django.sql
