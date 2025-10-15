@@ -20,10 +20,13 @@ git clone https://github.com/ton-compte/JO_Backend.git
 
 cd JO_Backend
 
-### 2. Créer l'environnement virtuel
+### 2. Créer l'environnement virtuel A LA RACINE DU PROJET
+au même niveau que le dossier venv.sample
 
+se positionner à la racine du projet puis  : 
 python -m venv venv
 
+Pour activer l'environnement virtuel : 
 venv\Scripts\activate      # Windows
 
 ### 3. Installer les dépendances
